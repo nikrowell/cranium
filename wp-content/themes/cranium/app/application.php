@@ -61,7 +61,7 @@ class Application {
 
         foreach($this->routes as $route) {
 
-			if (!in_array($method, $route->methods)) {
+            if (!in_array($method, $route->methods)) {
                 continue;
             }
 
@@ -69,23 +69,23 @@ class Application {
             $params = [];
             $matches = [];
 
-			$regex = preg_replace_callback(self::$pattern, function($matches) use (&$params) {
-				$params[$matches[1]] = null;
-				return (isset($matches[3])) ? '(?P<'.$matches[1].'>'.$matches[3].')' : '(?P<'.$matches[1].'>[^/\?]+)';
-			}, $path);
+            $regex = preg_replace_callback(self::$pattern, function($matches) use (&$params) {
+                $params[$matches[1]] = null;
+                return (isset($matches[3])) ? '(?P<'.$matches[1].'>'.$matches[3].')' : '(?P<'.$matches[1].'>[^/\?]+)';
+            }, $path);
 
-			if (preg_match('#^'.$regex.'(?:\?.*)?$#i', $url, $matches)) {
+            if (preg_match('#^'.$regex.'(?:\?.*)?$#i', $url, $matches)) {
 
                 foreach($matches as $key => $value) {
-	                if (array_key_exists($key, $params)) {
-	                    $route->params[$key] = urldecode($value);
-	                }
+                    if (array_key_exists($key, $params)) {
+                        $route->params[$key] = urldecode($value);
+                    }
                 }
 
-				return $route;
-			}
-		}
+                return $route;
+            }
+        }
 
-		return false;
+        return false;
     }
 }
