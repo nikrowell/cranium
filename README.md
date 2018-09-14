@@ -11,7 +11,6 @@ As frontends started becoming more dynamic and detached from the backends that p
 - [Usage](#usage)
 - [API](#api)
 - [Files](#files)
-- [Gotchas](#gotchas)
 - [Questions](#questions)
 
 ## Install
@@ -69,21 +68,7 @@ $app->get('/work/@slug:[a-zA-Z0-9-]+', function($req, $res) {
     ]);
 });
 ```
-
-## API
-
-### Application
-### Request
-### Response
-### Cache
-
-## Files
-
-Method of organizing files that works wells for most WordPress projects.<br>
-The advantage to this is always knowing where to look or where to add a new hook if needed.<br>
-More info coming soon...
-
-## Gotchas
+### Gotchas
 
 Links from post content or `get_permalink()` calls when using Cranium as a standalone api.
 
@@ -97,6 +82,25 @@ add_filter('page_link', 'replace_home_url');
 add_filter('post_link', 'replace_home_url');
 add_filter('the_content', 'replace_home_url');
 ```
+
+## API
+
+### Application
+The `$app` instance is your router. It exposes methods for `get`, `post`, `put`, `patch`, `delete`, `options` and `all` (matches all HTTP verbs).
+
+#### `$app->METHOD($path, $callback)`
+- `path`: a string pattern to match
+- `callback`: a closure function to call when path matches the url
+
+### Request
+### Response
+### Cache
+
+## Files
+
+Method of organizing files that works wells for most WordPress projects.<br>
+The advantage to this is always knowing where to look or where to add a new hook if needed.<br>
+More info coming soon...
 
 ## Questions
 
