@@ -46,7 +46,7 @@ if (!defined('ABSPATH')) {
     <meta name="theme-color" content="#ffffff">
 
     <link rel="stylesheet" href="">
-    <link rel="alternate" href="http://feeds.feedburner.com/example" type="application/rss+xml" title="RSS" >
+    <link rel="alternate" href="http://feeds.feedburner.com/example" type="application/rss+xml">
     <link rel="canonical" href="">
 
     <title>Lorem Ipsum Page Title | Example Site</title>

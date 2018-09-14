@@ -16,22 +16,15 @@ As frontends started becoming more dynamic and detached from the backends that p
 
 ## Install
 
-1. Download the latest version of WordPress<br>`curl -O https://wordpress.org/latest.zip`
+1. Download the latest version of WordPress `curl -O https://wordpress.org/latest.zip`
 
-2. Unzip the file you just downloaded<br>
-`unzip latest.zip`
+2. Unzip the file you just downloaded `unzip latest.zip`
 
-3. Copy the unzipped files into the parent directory<br>
-`cp -r wordpress/ ./` OSX<br>
-`cp -RT wordpress/ ./` Linux
+3. Copy the unzipped files into the parent directory `cp -r wordpress/ ./` on OSX or `cp -RT wordpress/ ./` on Linux
 
-4. Remove the zip<br>
-`rm latest.zip`
+4. Remove the zip `rm latest.zip` and the unzipped folder `rm -fr wordpress/`
 
-5. Remove the unzipped folder<br>
-`rm -fr wordpress/`
-
-6. Edit wp-config.php as needed, including [security salts](https://api.wordpress.org/secret-key/1.1/salt/) and default DB credentials. For added security, new installs should set `$table_prefix` to something other than 'wp_'
+6. Edit **wp-config.php** including [security salts](https://api.wordpress.org/secret-key/1.1/salt/) and default DB credentials. For added security, new installs should set `$table_prefix` to something other than 'wp_'
 
 ## Configure
 
@@ -41,6 +34,11 @@ Cranium uses a modified wp-config.php file that allows for setting environment-s
 $env['WP_DEBUG'] = true;
 $env['DB_HOST'] = 'localhost';
 $env['MY_CONSTANT'] = 808;
+
+// examples above would automatically translate to:
+define('WP_DEBUG', true);
+define('DB_HOST', 'localhost');
+define('MY_CONSTANT', 808);
 ```
 
 Production settings sould be set in wp-config.php and overriden as needed in wp-config-local.php, which is part of the default gitignore. If sensitive information needs to be kept out of repositories (API keys etc), a wp-config-local.php file can also be used in a production environment.
@@ -103,11 +101,11 @@ add_filter('the_content', 'replace_home_url');
 ## Questions
 
 ### Why not just use the official REST API?
-Good question. Cranium removes the "brains" of WordPress by hijacking all requests via the [do_parse_request](https://developer.wordpress.org/reference/hooks/do_parse_request/) filter. This means that nothing will load and that all request parsing and responses are up to you. Unless interecepted by a custom route handler, Cranium will load the theme's **index.php** file. This file could be empty (for example, using Cranium at `api.example.com`), or could contain your bundled assets and any bootstrapped data you want to pass along. Here are some goals:
+Good question. Cranium removes the "brains" of WordPress by hijacking all requests via the [do_parse_request](https://developer.wordpress.org/reference/hooks/do_parse_request/) filter. This means that nothing will load and that all request parsing and responses are up to you. Unless interecepted by a custom route handler, Cranium will load the theme's **index.php** file. This file could be empty (useful if using Cranium at `api.example.com`), or could contain your bundled assets and any bootstrapped data you want to pass along.
 
-* Potential **speed increase**, avoiding uneccessary queries
+* Potential **speed increase**, avoiding uneccessary overhead
 * **Simplified interface** for working with requests and responses
-* **Flexible and customized**. If your front-end is expecting `id`, `title` and `content`, you can easily omit many properties like `post_mime_type` and `post_modified_gmt`.
+* **Flexible and customized**. If your front-end is expecting `id`, `title` and `content`, you can return just that and easily omit many properties like `post_mime_type` and `post_modified_gmt`.
 * **Less verbose**. Ever wonder why people loath working with WordPress but love frameworks like Laravel and Lumen?
 ```php
 // how does this make you feel?
@@ -127,10 +125,10 @@ $app->get('/hello/@slug:[a-zA-Z0-9-]+', function($req, $res) {
 ```
 
 ### Why not a plugin?
-The whole point is to not be a theme and to approach WordPress differently. In fact, many plugins won't work as expected given how Craniun hijacks request parsing and leaves all responses and redering up to you.
+The whole point is to not be a typical theme and to approach WordPress differently. In fact, many plugins won't work as expected given how Craniun hijacks request parsing and leaves all responses and rendering up to you.
 
 ### Why not use WordPress without a theme?
-WP_USE_THEMES is a handy constant indeed, but by using WordPress as a standalone platform, you loose access to many useful lifecycle hooks, including [ACF](https://www.advancedcustomfields.com/resources/) filters, admin actions etc.
+WP_USE_THEMES is a handy constant indeed, but by using WordPress outside of a theme, you loose access to many useful lifecycle hooks, including init actions, [ACF](https://www.advancedcustomfields.com/resources/) filters etc.
 
 ### Why is your screenshot.png so lame?
 I don't know.
