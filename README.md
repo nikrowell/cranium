@@ -4,7 +4,17 @@
 
 As frontends started becoming more dynamic and detached from the backends that powered them, headless CMS services like [Prismic](https://prismic.io/) and [Contentful](https://www.contentful.com/) started gaining popularity. Those services are fantastic, but I wanted to continue using a familiar, open source and self-hosted solution.
 
-## Installation
+## Table of Contents
+
+- [Install](#install)
+- [Configure](#configure)
+- [Usage](#usage)
+- [API](#api)
+- [Files](#files)
+- [Gotchas](#gotchas)
+- [Questions](#questions)
+
+## Install
 
 1. Download the latest version of WordPress<br>`curl -O https://wordpress.org/latest.zip`
 
@@ -23,11 +33,11 @@ As frontends started becoming more dynamic and detached from the backends that p
 
 6. Edit wp-config.php as needed, including [security salts](https://api.wordpress.org/secret-key/1.1/salt/) and default DB credentials. For added security, new installs should set `$table_prefix` to something other than 'wp_'
 
-## Configuration
+## Configure
 
 Cranium uses a modified wp-config.php file that allows for setting environment-specific core and theme constants. If a **wp-config-local.php** file exists, it will be imported after the default settings have loaded. All core and theme constants are set using an associate array, where keys become PHP constants:
 
-```
+```php
 $env['WP_DEBUG'] = true;
 $env['DB_HOST'] = 'localhost';
 $env['MY_CONSTANT'] = 808;
@@ -95,10 +105,10 @@ add_filter('the_content', 'replace_home_url');
 ### Why not just use the official REST API?
 Good question. Cranium removes the "brains" of WordPress by hijacking all requests via the [do_parse_request](https://developer.wordpress.org/reference/hooks/do_parse_request/) filter. This means that nothing will load and that all request parsing and responses are up to you. Unless interecepted by a custom route handler, Cranium will load the theme's **index.php** file. This file could be empty (for example, using Cranium at `api.example.com`), or could contain your bundled assets and any bootstrapped data you want to pass along. Here are some goals:
 
-* Potential speed increase, avoiding uneccessary queries.
-* Simplified interface for defining custom routes.
-* Customized, lighter weight responses. If your front-end is expecting `id`, `title` and `content`, you can easily omit many properties like `post_mime_type` and `post_modified_gmt`.
-* Less verbose. Ever wonder why people loath working with WordPress but love frameworks like Laravel and Lumen?
+* Potential **speed increase**, avoiding uneccessary queries
+* **Simplified interface** for working with requests and responses
+* **Flexible and customized**. If your front-end is expecting `id`, `title` and `content`, you can easily omit many properties like `post_mime_type` and `post_modified_gmt`.
+* **Less verbose**. Ever wonder why people loath working with WordPress but love frameworks like Laravel and Lumen?
 ```php
 // how does this make you feel?
 add_action('rest_api_init', function() {
