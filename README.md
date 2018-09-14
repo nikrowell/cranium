@@ -40,7 +40,6 @@ Production settings sould be set in wp-config.php and overriden as needed in wp-
 More examples coming soon!
 Using Cranium as theme vs a separate API etc...
 
-
 ```php
 require 'app/autoload.php';
 
@@ -69,6 +68,27 @@ $app->get('/work/@slug:[a-zA-Z0-9-]+', function($req, $res) {
 ### Request
 ### Response
 ### Cache
+
+## Files
+
+Method of organizing files that works wells for most WordPress projects.<br>
+The advantage to this is always knowing where to look or where to add a new hook if needed.<br>
+More info coming soon...
+
+## Gotchas
+
+Links from post content or `get_permalink()` calls when using Cranium as a standalone api.
+
+```php
+// functions/filters.php
+function replace_home_url($str) {
+    return str_replace(home_url(), '', $str);
+}
+
+add_filter('page_link', 'replace_home_url');
+add_filter('post_link', 'replace_home_url');
+add_filter('the_content', 'replace_home_url');
+```
 
 ## Questions
 
