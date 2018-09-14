@@ -1,0 +1,51 @@
+# ===============================================================
+# .gitignore for WordPress
+# based on https://gist.github.com/salcode/b515f520d3f8207ecd04
+# All files are ignored by default.
+# Individual files and directories must be explicitly whitelisted
+# ---------------------------------------------------------------
+# ignore everything in the webroot except wp-content
+# ---------------------------------------------------------------
+
+/*
+!wp-content/
+
+# ===============================================================
+# ignore everything in wp-content except "plugins" and "themes"
+# ---------------------------------------------------------------
+
+wp-content/*
+!wp-content/plugins/
+!wp-content/themes/
+
+# ===============================================================
+# ignore all plugins and themes unless whitelisted below
+# ---------------------------------------------------------------
+
+wp-content/plugins/*
+wp-content/themes/*
+
+# ===============================================================
+# ignore specific files or extensions anywhere they appear
+# ---------------------------------------------------------------
+
+_/
+*.js.map
+*.css.map
+*.log
+*.sql
+*.zip
+.DS_Store
+.sass-cache
+error_log
+node_modules/
+wp-config-local.php
+
+# ===============================================================
+# track all whitelisted files and directories below
+# ---------------------------------------------------------------
+
+!.gitignore
+!README.md
+!wp-config.php
+!wp-content/themes/cranium/
