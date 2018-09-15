@@ -22,18 +22,12 @@ class Response {
         exit(json_encode($data));
     }
 
-    public function send($data) {
+    public function send($data = null) {
         if (is_array($data)) {
             return $this->json($data);
-        } else if (empty($data)) {
-            return $this->end();
         }
         $this->header('Content-Type', 'text/html');
-        exit($data);
-    }
-
-    public function end() {
-        exit(' ');
+        exit(empty($data) ? ' ' : $data);
     }
 
     public function render($template, $data = []) {

@@ -93,14 +93,37 @@ The `$app` instance is your router. It exposes methods for `get`, `post`, `put`,
 - `callback`: a closure function to call when path matches the url
 
 ### Request
+
+- header
+- param
+- query
+- body
+- method, url, xhr, ip, ua
+
 ### Response
+
+- header
+- status
+- send
+- json
+- render
+- redirect
+
 ### Cache
+
+- get
+- set
+- clear
 
 ## Files
 
 Method of organizing files that works wells for most WordPress projects.<br>
-The advantage to this is always knowing where to look or where to add a new hook if needed.<br>
-More info coming soon...
+The advantage to this is always knowing where to look or where to add a new hook if needed. More info coming soon...
+
+- actions
+- admin
+- filters
+- helpers
 
 ## Questions
 

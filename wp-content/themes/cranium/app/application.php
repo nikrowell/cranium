@@ -29,11 +29,13 @@ class Application {
         $this->route(self::$methods, $path, $callback);
     }
 
+    // TODO: use this to add support for middleware (callback only)
     public function route($methods, $path, $callback) {
         $path = $this->base.trim($path, '/');
         $this->routes[] = new Route($methods, $path, $callback);
     }
 
+    // TODO: allow passing in a URL to exceucte internal endpoints?
     public function run() {
 
         $method = isset($_SERVER['HTTP_X_HTTP_METHOD_OVERRIDE']) ? $_SERVER['HTTP_X_HTTP_METHOD_OVERRIDE'] : $_SERVER['REQUEST_METHOD'];

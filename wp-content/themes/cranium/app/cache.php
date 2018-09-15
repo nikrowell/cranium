@@ -75,7 +75,8 @@ class Cache {
         return true;
     }
 
-    public static function clear() {
+    public static function clear($key = null) {
+        // TODO: if (!$key) clear all files in cache dir
         $file = self::name($key);
         if (file_exists($file)) return unlink($file);
         return false;
