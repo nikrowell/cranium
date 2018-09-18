@@ -108,11 +108,27 @@ The `$app` instance is your router. It exposes methods for `get`, `post`, `put`,
 
 ### Request
 
-- header
-- param
-- query
-- body
-- method, url, xhr, ip, ua
+All request methods accept an optional second argument to use as a fallback value.
+
+#### `$req->param($key[, $fallback = null])`
+Retrieves a captured url parameter by key.
+
+#### `$req->header($key[, $fallback = null])`
+Retrieves the given header from the request.
+
+#### `$req->query($key[, $fallback = null])`
+Retrieves the given parameters from the query string.
+
+#### `$req->body($key[, $fallback = null])`
+Retrieves the given parameters from the query string.
+
+Property         | Description
+---------------- | -----------------------------------------
+**`method`**     | Request method via `$_SERVER['REQUEST_METHOD']`
+**`url`**        | Request url via `$_SERVER['REQUEST_URI']`
+**`xhr`**        | True if X-Requested-With header is xmlhttprequest
+**`ip`**         | IP address via `$_SERVER['REMOTE_ADDR']`
+**`ua`**         | User agent string via `$_SERVER['HTTP_USER_AGENT']`
 
 ### Response
 
@@ -142,7 +158,7 @@ The advantage to this is always knowing where to look or where to add a new hook
 ## Questions
 
 ### Why not just use the official REST API?
-Good question. Cranium removes the "brains" of WordPress by hijacking all requests via the [do_parse_request](https://developer.wordpress.org/reference/hooks/do_parse_request/) filter. This means that nothing will load and that all request parsing and responses are up to you. Unless interecepted by a custom route handler, Cranium will load the theme's **index.php** file. This file could be empty (useful if using Cranium at `api.example.com`), or could contain your bundled assets and any bootstrapped data you want to pass along. Here are some reasons I opted for a custom API:
+Good question. Cranium removes the "brains" of WordPress by hijacking all requests via the [do_parse_request](https://developer.wordpress.org/reference/hooks/do_parse_request/) filter, effectively trimming the fat and starting from a blank slate. This means that all request parsing, queries and responses are up to you. Unless interecepted by a custom route handler, Cranium will load the theme's **index.php** file. This file could be empty (useful if using Cranium at `api.example.com`), or could contain your bundled assets and any bootstrapped data you want to pass along to your scripts. Here are some reasons I opted for a custom API like this:
 
 * Potential **speed increase**, avoiding uneccessary overhead
 * **Simplified interface** for working with requests and responses

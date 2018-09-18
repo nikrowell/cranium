@@ -34,20 +34,20 @@ class Request {
         }
     }
 
-    public function header($name, $fallback = null) {
-        return $this->headers[$name] ?? $fallback;
+    public function header($key, $fallback = null) {
+        return $this->headers[$key] ?? $fallback;
     }
 
-    public function param($name, $fallback = null) {
-        return $this->params[$name] ?? $fallback;
+    public function param($key, $fallback = null) {
+        return $this->params[$key] ?? $fallback;
     }
 
-    public function query($name, $fallback = null) {
-        return $this->query[$name] ?? $fallback;
+    public function query($key, $fallback = null) {
+        return $this->query[$key] ?? $fallback;
     }
 
-    public function body($name, $fallback = null) {
-        return $this->body[$name] ?? $fallback;
+    public function body($key, $fallback = null) {
+        return $this->body[$key] ?? $fallback;
     }
 
     private function decode($value) {
