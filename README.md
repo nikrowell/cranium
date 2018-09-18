@@ -74,9 +74,9 @@ $app->get('/page/@slug:[a-zA-Z0-9-]+', function($req, $res) {
 
 $app->post('/contact', function($req, $res) {
 
-    $message  = $res->body('name').PHP_EOL;
-    $message .= $res->body('email').PHP_EOL;
-    $message .= $res->body('message');
+    $message  = $req->body('name').PHP_EOL;
+    $message .= $req->body('email').PHP_EOL;
+    $message .= $req->body('message');
     wp_mail('hello@example.com', 'New Message!', $message);
 
     $res->send(['status' => 'ok']);
