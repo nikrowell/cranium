@@ -50,7 +50,11 @@ Using Cranium as theme vs a separate API etc...
 ```php
 require 'app/autoload.php';
 
-$app->get('/work/@slug:[a-zA-Z0-9-]+', function($req, $res) {
+$app->init([
+    'base' => '/api'
+]);
+
+$app->get('/page/@slug:[a-zA-Z0-9-]+', function($req, $res) {
 
     $slug = $req->param('slug');
     $page = get_page_by_path($slug);
@@ -66,6 +70,16 @@ $app->get('/work/@slug:[a-zA-Z0-9-]+', function($req, $res) {
         'title' => get_the_title($page),
         'content' => apply_filters('the_content', $page->post_content)
     ]);
+});
+
+$app->post('/contact', function($req, $res) {
+
+    $message  = $res->body('name').PHP_EOL;
+    $message .= $res->body('email').PHP_EOL;
+    $message .= $res->body('message');
+    wp_mail('hello@example.com', 'New Message!', $message);
+
+    $res->send(['status' => 'ok']);
 });
 ```
 ### Gotchas
@@ -128,7 +142,7 @@ The advantage to this is always knowing where to look or where to add a new hook
 ## Questions
 
 ### Why not just use the official REST API?
-Good question. Cranium removes the "brains" of WordPress by hijacking all requests via the [do_parse_request](https://developer.wordpress.org/reference/hooks/do_parse_request/) filter. This means that nothing will load and that all request parsing and responses are up to you. Unless interecepted by a custom route handler, Cranium will load the theme's **index.php** file. This file could be empty (useful if using Cranium at `api.example.com`), or could contain your bundled assets and any bootstrapped data you want to pass along.
+Good question. Cranium removes the "brains" of WordPress by hijacking all requests via the [do_parse_request](https://developer.wordpress.org/reference/hooks/do_parse_request/) filter. This means that nothing will load and that all request parsing and responses are up to you. Unless interecepted by a custom route handler, Cranium will load the theme's **index.php** file. This file could be empty (useful if using Cranium at `api.example.com`), or could contain your bundled assets and any bootstrapped data you want to pass along. Here are some reasons I opted for a custom API:
 
 * Potential **speed increase**, avoiding uneccessary overhead
 * **Simplified interface** for working with requests and responses

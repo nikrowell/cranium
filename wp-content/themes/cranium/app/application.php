@@ -29,7 +29,7 @@ class Application {
         $this->route(self::$methods, $path, $callback);
     }
 
-    // TODO: use this to add support for middleware (callback only)
+    // TODO: use this to add support for middleware (callback only)?
     public function route($methods, $path, $callback) {
         $path = $this->base.trim($path, '/');
         $this->routes[] = new Route($methods, $path, $callback);
