@@ -108,7 +108,7 @@ The `$app` instance is your router. It exposes methods for `get`, `post`, `put`,
 
 ### Request
 
-All request methods accept an optional second argument to use as a fallback value.
+All request methods accept an optional second argument to use as a fallback value. The array corresponding to each method is available directly as `params`, `headers`, `query` and `body` along with additional public properties listed below.
 
 #### `$req->param($key[, $fallback = null])`
 Retrieves a captured url parameter by key.
@@ -117,10 +117,10 @@ Retrieves a captured url parameter by key.
 Retrieves the given header from the request.
 
 #### `$req->query($key[, $fallback = null])`
-Retrieves the given parameters from the query string.
+Retrieves the given parameter from the query string.
 
 #### `$req->body($key[, $fallback = null])`
-Retrieves the given parameters from the query string.
+Retrieves the given parameter from the body.
 
 Property         | Description
 ---------------- | -----------------------------------------
@@ -132,18 +132,20 @@ Property         | Description
 
 ### Response
 
-- header
-- status
-- send
-- json
-- render
-- redirect
+Both `header()` and `status()` return **`$this`** for chaining.
+
+#### `$res->header($headers[, $value = null])`
+#### `$res->status($http_status)`
+#### `$res->send($data = null)`
+#### `$res->json($data)`
+#### `$res->render($template[, $data = []])`
+#### `$res->redirect($url[, $status = 302])`
 
 ### Cache
 
-- get
-- set
-- clear
+- `Cache::get`
+- `Cache::set`
+- `Cache::clear`
 
 ## Files
 
