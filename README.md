@@ -15,15 +15,13 @@ As frontends started becoming more dynamic and detached from the backends that p
 
 ## Install
 
-1. Download the latest version of WordPress `curl -O https://wordpress.org/latest.zip`
-
-2. Unzip the file you just downloaded `unzip latest.zip`
-
-3. Copy the unzipped files into the parent directory `cp -r wordpress/ ./` on OSX or `cp -RT wordpress/ ./` on Linux
-
-4. Remove the zip `rm latest.zip` and the unzipped folder `rm -fr wordpress/`
-
-6. Edit **wp-config.php** including [security salts](https://api.wordpress.org/secret-key/1.1/salt/) and default DB credentials. For added security, new installs should set `$table_prefix` to something other than 'wp_'
+1. Download this repo, or clone it and run `rm -fr .git`
+2. Temporarily move the theme to the root directory `mv wp-content/themes/cranium ./`
+3. Download the latest version of WordPress `curl -O https://wordpress.org/latest.zip` and unzip it `unzip latest.zip`
+4. Copy the unzipped files into the parent directory `cp -r wordpress/ ./` on OSX or `cp -RT wordpress/ ./` on Linux
+5. Move the theme back `mv cranium/ wp-content/themes/`
+6. Remove the zip `rm latest.zip` and the unzipped folder `rm -fr wordpress/`
+7. Edit **wp-config.php** including [security salts](https://api.wordpress.org/secret-key/1.1/salt/) and default DB credentials. For added security, new installs should set `$table_prefix` to something other than 'wp_'
 
 ## Configure
 
