@@ -1,6 +1,6 @@
 # Cranium
 
-> A brainless WordPress theme for modern frontends. Inspired by Express.
+> A minimal, brainless WordPress theme for modern frontends. Inspired by Express.
 
 As frontends started becoming more dynamic and detached from the backends that powered them, headless CMS services like [Prismic](https://prismic.io/) and [Contentful](https://www.contentful.com/) started gaining popularity. Those services are fantastic, but I wanted to continue using a familiar, open source and self-hosted solution.
 
