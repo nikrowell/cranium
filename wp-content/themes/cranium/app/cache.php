@@ -52,10 +52,10 @@ class Cache {
 
         $dir = self::$dir;
 
-        if (!is_dir($dir) || !is_writable($dir)) {
-            error_log('CACHE_DIR '.CACHE_DIR.' does not exist or is not writeable ');
-            return false;
-        }
+        if ((!is_dir($dir) || !is_writable($dir)) && !mkdir($dir)) {
+			error_log('CACHE_DIR '.CACHE_DIR.' does not exist or is not writeable');
+			return false;
+		}
 
         $file = self::name($key);
 
