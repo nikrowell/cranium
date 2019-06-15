@@ -74,7 +74,7 @@ if (!defined('ABSPATH')) {
     ga('send', 'pageview');
     </script>
 
-    <link rel="stylesheet" href="/build.css?v=<?php echo GIT_COMMIT ?>">
+    <link rel="stylesheet" href="/build.css?v=20190615">
 
 </head>
 <body>
@@ -84,7 +84,7 @@ if (!defined('ABSPATH')) {
 <?php if (isset($data)): ?>
 <script type="application/json" id="data"><?php echo json_encode($data) ?></script>
 <?php endif; ?>
-<script src="/build.js?v=<?php echo GIT_COMMIT ?>"></script>
+<script src="/build.js?v=20190615"></script>
 
 </body>
 </html>
