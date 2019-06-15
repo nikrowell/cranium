@@ -38,8 +38,9 @@ _/
 .DS_Store
 .sass-cache
 error_log
+build/
+cache/
 node_modules/
-wp-config-local.php
 
 # ===============================================================
 # track all whitelisted files and directories below
@@ -47,5 +48,6 @@ wp-config-local.php
 
 !.gitignore
 !README.md
+!env.php
 !wp-config.php
 !wp-content/themes/cranium/
