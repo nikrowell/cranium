@@ -1,5 +1,8 @@
 <?php
 
+// TODO: add namespacing
+// use Cranium\Response;
+
 class Response {
 
     public function header($headers, $value = null) {

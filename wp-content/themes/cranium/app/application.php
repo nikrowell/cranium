@@ -38,6 +38,8 @@ class Application {
     // TODO: allow passing in a URL to exceucte internal endpoints?
     public function run() {
 
+        if (is_admin()) return true;
+
         $method = isset($_SERVER['HTTP_X_HTTP_METHOD_OVERRIDE']) ? $_SERVER['HTTP_X_HTTP_METHOD_OVERRIDE'] : $_SERVER['REQUEST_METHOD'];
         $url = '/'.trim($_SERVER['REQUEST_URI'], '/');
         $req = new Request();
