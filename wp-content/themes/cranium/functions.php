@@ -3,6 +3,10 @@
 defined('ABSPATH') or die;
 require 'app/autoload.php';
 
+$app->init([
+    'base' => '/api'
+]);
+
 $app->get('/home', function($req, $res) {
     $res->json(['projects' => ['one', 'two', 'three']]);
 });

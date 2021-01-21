@@ -22,6 +22,11 @@ class Application {
         if (!in_array($method, self::$methods)) {
             trigger_error('Invalid method "'.$method.'"', E_USER_ERROR);
         }
+        // TODO: allow passing in a URL to exceucte internal endpoints?
+        // if (empty($args[1])) {
+        //     $this->route([$method], $args[0], $args[1]);
+        //     return;
+        // }
         $this->route([$method], $args[0], $args[1]);
     }
 
@@ -52,13 +57,14 @@ class Application {
         ]);
 
         $route = $this->match($method, $url);
+        $state = [];
 
         if ($route) {
             $req->params = $route->params;
-            $route($req, $res);
+            $state = $route($req, $res);
         }
 
-        $res->render('index');
+        $res->render('index', $state);
     }
 
     private function match($method, $url) {
